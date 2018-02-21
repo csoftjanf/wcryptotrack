@@ -1,0 +1,264 @@
+<section class="content--full">
+  <div class="row">
+    <div class="col-md-12">
+      <a [routerLink]="['/crypto']" class="btn btn-link">Back</a>
+    </div>
+  </div>
+  <header class="content__title">
+    <div class="pagetitle" *ngIf="_coinview">Coin View for {{_coinview.mcap.name}} as at {{_coinview.mcap.valueDate  | date:'fullDate'}} {{_coinview.mcap.valueDate | date:'shortTime'}}</div>
+  </header>
+
+  <div class="row">
+    <div class="col-md-6 col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row" *ngIf="hidecoinflag">
+            <div class="col-md-12">
+              <button class="btn btn-lg btn-primary" (click)="addcoin()">Sell Coin</button>
+            </div>
+          </div>
+          <div class="row" *ngIf="addcoinflag">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-2 prompt">Sale Date</div>
+                <div class="col-md-4 prompt"><input class="form-control form-control-lg" type="text" placeholder="Sale Date" [(ngModel)]="coinsale.sdate"><i class="form-group__bar"></i></div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4"></div>
+              </div>
+              <div class="row">
+                <div class="col-md-2 prompt">Quantity</div>
+                <div class="col-md-4 prompt"><input class="form-control form-control-lg" type="text" placeholder="Quantity" [(ngModel)]="coinsale.qnt"><i class="form-group__bar"></i></div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4"></div>
+              </div>
+              <div class="row">
+                <div class="col-md-2 prompt">Sale Price</div>
+                <div class="col-md-4 prompt"><input class="form-control form-control-lg" type="text" placeholder="Sell Price" [(ngModel)]="coinsale.price"><i class="form-group__bar"></i></div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4"></div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <button class="btn btn-lg btn-primary" (click)="savecoin()">Save</button>
+                  <button class="btn btn-lg btn-primary" (click)="cancelsave()">Cancel</button>
+                </div>
+                <div class="col-md-9 col-sm-6"></div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  {{errorMessage}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-sm-12">
+      <div class="card" *ngIf="_coinview">
+        <h2>My  {{_coinview.mcap.name}}</h2>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4 col-sm-12 prompt">Current Holding Quantity :</div>
+            <div class="col-md-4 col-sm-12 prompt text-right">{{cstats.hold_qnt | number }}</div>
+            <div class="col-md-4 col-sm-12"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 col-sm-12 prompt">Current Holding Value :</div>
+            <div class="col-md-4 col-sm-12 prompt text-right">${{cstats.hold_val | number:'1.2-2'}}</div>
+            <div class="col-md-4 col-sm-12"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 col-sm-12 prompt">Unrealised Gain :</div>
+            <div class="col-md-4 col-sm-12 prompt text-right">${{cstats.hold_profit | number:'1.2-2'}}</div>
+            <div class="col-md-4 col-sm-12 prompt text-right"><b>{{cstats.hold_profitperc | percent:'1.2-2'}}</b></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 col-sm-12 prompt"><hr /></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 col-sm-12 prompt">Sold :</div>
+            <div class="col-md-4 col-sm-12 prompt text-right">{{cstats.sold_qnt | number }}</div>
+            <div class="col-md-4 col-sm-12"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 col-sm-12 prompt">Value Sold :</div>
+            <div class="col-md-4 col-sm-12 prompt text-right">${{cstats.sold_val | number:'1.2-2'}}</div>
+            <div class="col-md-4 col-sm-12"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 col-sm-12 prompt">Realised Gain:</div>
+            <div class="col-md-4 col-sm-12 prompt text-right">${{cstats.sold_profit | number:'1.2-2'}}</div>
+            <div class="col-md-4 col-sm-12 prompt text-right"><b>{{cstats.sold_profitperc | percent:'1.2-2'}}</b></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 col-sm-12 prompt"><hr /></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 col-sm-12 prompt">Total Gain :</div>
+            <div class="col-md-4 col-sm-12 prompt text-right">${{cstats.tot_profit | number:'1.2-2'}}</div>
+            <div class="col-md-4 col-sm-12 prompt text-right"><b>{{cstats.tot_profitperc | percent:'1.2-2'}}</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6  col-sm-12">
+      <div class="card" *ngIf="_coinview">
+        <h2>Transaction History</h2>
+        <div class="card-body">
+          <table class='table table-striped mb-0'>
+            <thead>
+              <tr>
+                <th>Buy / Sell</th>
+                <th>Date</th>
+                <th class="text-right">Quantity</th>
+                <th class="text-right">Price</th>
+                <th class="text-right">Profit / Loss</th>
+                <th class="text-right">Profit Perc</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let trans of _coinview.transactions">
+                <td class="prompt" *ngIf="trans.buysell == 1">Buy</td>
+                <td class="prompt" *ngIf="trans.buysell == 0">Sell</td>
+                <td class="prompt">{{ trans.transdate }} </td>
+                <td class="prompt text-right">{{ trans.qnty | number }} </td>
+                <td class="prompt text-right">${{ trans.price | number }} </td>
+                <td class="prompt text-right" *ngIf="trans.buysell == 0">${{ trans.profit | number }} </td>
+                <td class="prompt text-right" *ngIf="trans.buysell == 0">{{ trans.profitperc |  percent:'1.2-2' }}</td>
+                <td class="prompt" *ngIf="trans.buysell == 1"></td>
+                <td class="prompt" *ngIf="trans.buysell == 1"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card" *ngIf="_coinview">
+        <h2>General data</h2>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-2 prompt">Rank :</div>
+            <div class="col-md-3 prompt">{{_coinview.mcap.rank}}</div>
+            <div class="col-md-2 prompt"></div>
+            <div class="col-md-3 prompt"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2 prompt">Price Aud :</div>
+            <div class="col-md-3 prompt">{{_coinview.mcap.price_aud | number:'1.2-4'}}</div>
+            <div class="col-md-2 prompt">Price USD :</div>
+            <div class="col-md-3 prompt">{{_coinview.mcap.price_usd | number:'1.2-4'}}</div>
+            <div class="col-md-2 prompt"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 prompt"><hr /></div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-2 prompt">Change 1h :</div>
+            <div class="col-md-3 prompt">{{_coinview.mcap.percent_change_1h/100  | percent:'1.2-2'}}</div>
+            <div class="col-md-2 prompt">Change 24h :</div>
+            <div class="col-md-3 prompt">{{_coinview.mcap.percent_change_24h/100  | percent:'1.2-2'}}</div>
+            <div class="col-md-2 prompt"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2 prompt">Change 7 d :</div>
+            <div class="col-md-3 prompt">{{_coinview.mcap.percent_change_7d/100  | percent:'1.2-2'}}</div>
+            <div class="col-md-7 prompt"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 prompt"><hr /></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2 prompt">Max Supply :</div>
+            <div class="col-md-3 prompt">{{_coinview.mcap.max_supply | number:'1.2-4'}}</div>
+            <div class="col-md-7 prompt"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2 prompt">Market cap AUD :</div>
+            <div class="col-md-3 prompt">${{_coinview.mcap.market_cap_aud | number:'1.2-4' }}</div>
+            <div class="col-md-2 prompt">Market cap USD :</div>
+            <div class="col-md-3 prompt">${{_coinview.mcap.market_cap_usd | number:'1.2-4' }}</div>
+            <div class="col-md-2 prompt"></div>
+            <div class="col-md-2 prompt"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-6"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card" *ngIf="_coinview">
+        <div class="card-body">
+          <h3 class="card-title"></h3>
+          <div class="row">
+            <div class="col-md-12 prompt" *ngIf="_coinview.coinPortFolioHistory"><h2>Value history</h2></div>
+          </div>
+          <div class="row">
+            <div class="col-md-12" *ngIf="_coinview.coinPortFolioHistory">
+              <canvas baseChart
+                      [datasets]="vbarChartData"
+                      [labels]="vbarChartLabels"
+                      [options]="vbarChartOptions"
+                      [legend]="vbarChartLegend"
+                      [chartType]="vbarChartType"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card" *ngIf="_coinview">
+        <div class="card-body">
+          <h3 class="card-title"></h3>
+          <div class="row">
+            <div class="col-md-12 prompt"><h2>Holding history</h2></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <canvas baseChart
+                      [datasets]="barChartData"
+                      [labels]="barChartLabels"
+                      [options]="barChartOptions"
+                      [legend]="barChartLegend"
+                      [chartType]="barChartType"></canvas>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

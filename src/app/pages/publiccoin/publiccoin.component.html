@@ -1,0 +1,91 @@
+<section class="content--full">
+  <div class="row">
+    <div class="col-md-12">
+      <a [routerLink]="['/public']" class="btn btn-link">Back</a>
+    </div>
+  </div>
+  <header class="content__title">
+    <div class="pagetitle" *ngIf="_coinview">Coin View for {{_coinview.mcap.name}} </div>
+  </header>
+
+
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card" *ngIf="_coinview">
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col-md-2 prompt">Date Updated :</div>
+            <div class="col-md-3 prompt">{{_coinview.mcap.valueDate  | date:'fullDate'}}</div>
+            <div class="col-md-2 prompt">Rank :</div>
+            <div class="col-md-3 prompt">{{_coinview.mcap.rank}}</div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2 prompt">Price Aud :</div>
+            <div class="col-md-3 prompt">{{_coinview.mcap.price_aud | number:'1.2-4'}}</div>
+            <div class="col-md-2 prompt">Price USD :</div>
+            <div class="col-md-3 prompt">{{_coinview.mcap.price_usd | number:'1.2-4'}}</div>
+            <div class="col-md-2 prompt"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 prompt"><hr /></div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-2 prompt">Change 1h :</div>
+            <div class="col-md-3 prompt">{{_coinview.mcap.percent_change_1h/100  | percent:'1.2-2'}}</div>
+            <div class="col-md-2 prompt">Change 24h :</div>
+            <div class="col-md-3 prompt">{{_coinview.mcap.percent_change_24h/100  | percent:'1.2-2'}}</div>
+            <div class="col-md-2 prompt"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2 prompt">Change 7 d :</div>
+            <div class="col-md-3 prompt">{{_coinview.mcap.percent_change_7d/100  | percent:'1.2-2'}}</div>
+            <div class="col-md-7 prompt"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 prompt"><hr /></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2 prompt">Max Supply :</div>
+            <div class="col-md-3 prompt">{{_coinview.mcap.max_supply | number:'1.2-4'}}</div>
+            <div class="col-md-7 prompt"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2 prompt">Market cap AUD :</div>
+            <div class="col-md-3 prompt">${{_coinview.mcap.market_cap_aud | number:'1.2-4' }}</div>
+            <div class="col-md-2 prompt">Market cap USD :</div>
+            <div class="col-md-3 prompt">${{_coinview.mcap.market_cap_usd | number:'1.2-4' }}</div>
+            <div class="col-md-2 prompt"></div>
+            <div class="col-md-2 prompt"></div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card" *ngIf="_coinview">
+        <div class="card-body">
+          <h3 class="card-title">Price history</h3>
+          <div class="row">
+            <div class="col-md-12">
+              <canvas baseChart
+                      [datasets]="barChartData"
+                      [labels]="barChartLabels"
+                      [options]="barChartOptions"
+                      [legend]="barChartLegend"
+                      [chartType]="barChartType"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

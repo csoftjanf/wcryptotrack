@@ -1,0 +1,224 @@
+<section class="content--full">
+  <header class="content__title">
+    <div class="pagetitle">Crypto Currency Dashboard for {{currentUser.firstName}} {{currentUser.lastName}}</div>
+  </header>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row" *ngIf="hidecoinflag">
+            <div class="col-md-12">
+              <button class="btn btn-lg btn-primary" (click)="addcoin()">Add Coin</button>
+            </div>
+          </div>
+          <div class="row" *ngIf="addcoinflag">
+            <div class="col-md-12">
+              <!--<div class="row">
+                <div class="col-md-2 prompt">PortFolio</div>
+                <div class="col-md-4 prompt">
+                  <div class="input-group">
+                    <div class="form-group">
+                      <select2 *ngIf="portflist" [value]="coinPurchase.portfolio" [data]="selectPortfData" [options]="options" (valueChanged)="portfchange($event)" placeholder="no options selected"></select2>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4"></div>
+              </div>-->
+              <div class="row">
+                <div class="col-md-2 prompt">Coin</div>
+                <div class="col-md-4 prompt">
+                  <div class="input-group">
+                    <div class="form-group">
+                      <select2 *ngIf="coinlists" [value]="coinPurchase.coin" [data]="selectCoinData" [options]="options" (valueChanged)="typechange($event)" placeholder="no options selected"></select2>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4"></div>
+              </div>
+              <div class="row">
+                <div class="col-md-2 prompt">Purchase Date</div>
+                <div class="col-md-4 prompt"><input class="form-control form-control-lg" type="text" placeholder="Purchase Date" [(ngModel)]="coinPurchase.pdate"><i class="form-group__bar"></i></div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4"></div>
+              </div>
+              <div class="row">
+                <div class="col-md-2 prompt">Quantity</div>
+                <div class="col-md-4 prompt"><input class="form-control form-control-lg" type="text" placeholder="Quantity" [(ngModel)]="coinPurchase.qnt"><i class="form-group__bar"></i></div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4"></div>
+              </div>
+              <div class="row">
+                <div class="col-md-2 prompt">Purchase Price</div>
+                <div class="col-md-4 prompt"><input class="form-control form-control-lg" type="text" placeholder="Purchase Price" [(ngModel)]="coinPurchase.price"><i class="form-group__bar"></i></div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4"></div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <button class="btn btn-lg btn-primary" (click)="savecoin()">Save</button>
+                  <button class="btn btn-lg btn-primary" (click)="cancelsave()">Cancel</button>
+                </div>
+                <div class="col-md-9 col-sm-6"></div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  {{errorMessage}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="stats">
+    <div class="col-md-6 col-sm-12">
+      <div class="card">
+        <h2>My portfolio  as at {{UpdateDate | date:'fullDate'}}  {{UpdateDate | date:'shortTime'}}</h2>
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col-md-4 col-sm-12 prompt">Total Invested :</div>
+            <div class="col-md-4 col-sm-12 prompt text-right">${{stats.cstats.tot_invested | number }}</div>
+            <div class="col-md-4 col-sm-12"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 col-sm-12 prompt"><hr /></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 col-sm-12 prompt">Current Holding Value :</div>
+            <div class="col-md-4 col-sm-12 prompt text-right">${{stats.cstats.hold_val | number:'1.2-2'}}</div>
+            <div class="col-md-4 col-sm-12"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 col-sm-12 prompt">Unrealised Gain :</div>
+            <div class="col-md-4 col-sm-12 prompt text-right">${{stats.cstats.hold_profit | number:'1.2-2'}}</div>
+            <div class="col-md-4 col-sm-12 prompt text-right"><b>{{stats.cstats.hold_profitperc | percent:'1.2-2'}}</b></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 col-sm-12 prompt"><hr /></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 col-sm-12 prompt">Value Sold :</div>
+            <div class="col-md-4 col-sm-12 prompt text-right">${{stats.cstats.sold_val | number:'1.2-2'}}</div>
+            <div class="col-md-4 col-sm-12"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 col-sm-12 prompt">Realised Gain:</div>
+            <div class="col-md-4 col-sm-12 prompt text-right">${{stats.cstats.sold_profit | number:'1.2-2'}}</div>
+            <div class="col-md-4 col-sm-12 prompt text-right"><b>{{stats.cstats.sold_profitperc | percent:'1.2-2'}}</b></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 col-sm-12 prompt"><hr /></div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 col-sm-12 prompt">Total Gain :</div>
+            <div class="col-md-4 col-sm-12 prompt text-right">${{stats.cstats.tot_profit | number:'1.2-2'}}</div>
+            <div class="col-md-4 col-sm-12 prompt text-right"><b>{{stats.cstats.tot_profitperc | percent:'1.2-2'}}</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <canvas baseChart
+                  [datasets]="barChartData"
+                  [labels]="barChartLabels"
+                  [options]="barChartOptions"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="actions">
+          <a class="actions__item zmdi zmdi-trending-up" [routerLink]="['/crypto']"></a>
+        </div>
+        <div class="card-body">
+          <h2>Current Holding</h2>
+          <div class="row">
+            <div class="col-md-12">
+              <table class='table table-striped mb-0' *ngIf="portfolio">
+                <thead>
+                  <tr>
+                    <th>Currency</th>
+                    <th>Purchase Date</th>
+                    <th class="text-right">Quantity</th>
+                    <th class="text-right">Purchase Price</th>
+                    <th class="text-right">Purchase Value</th>
+                    <th class="text-right">Current Price</th>
+                    <th class="text-right">Current Value</th>
+                    <th class="text-right">Profit / Loss</th>
+                    <th class="text-right">Profit Perc</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let genlist of portfolio">
+                    <td class="prompt" (click)="GotToCoinView(genlist.holdingid)">{{ genlist.code }} </td>
+                    <td class="prompt">{{ genlist.datePurchased | date }} </td>
+                    <td class="prompt text-right">{{ genlist.qnty | number }} </td>
+                    <td class="prompt text-right">{{ genlist.price | number }} </td>
+                    <td class="prompt text-right">{{ genlist.purchaseValue | number }} </td>
+                    <td class="prompt text-right">{{ genlist.latestvalue | number }} </td>
+                    <td class="prompt text-right">{{ genlist.currentValue | number }} </td>
+                    <td class="prompt text-right">{{ genlist.profitValue | number }} </td>
+                    <td class="prompt text-right">{{ genlist.profitPerc | percent: '2.1-2' }} </td>
+                  </tr>
+                  <tr>
+                    <td class="prompt" colspan="2">Total Portfolio</td>
+                    <td class="prompt text-right"></td>
+                    <td class="prompt text-right"></td>
+                    <td class="prompt text-right">{{ portfolioTotals.totalpurchasevalue | number }} </td>
+                    <td class="prompt text-right"></td>
+                    <td class="prompt text-right">{{ portfolioTotals.totalcurrentvalue | number }} </td>
+                    <td class="prompt text-right">{{ portfolioTotals.totalprofit | number }} </td>
+                    <td class="prompt text-right">{{ portfolioTotals.totprofitperc | percent: '2.1-2' }} </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="stats">
+
+    <div class="col-md-6 col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h2>Coin holding</h2>
+          <div style="display: block">
+            <canvas baseChart
+                    [data]="pieChartData"
+                    [labels]="pieChartLabels"
+                    [chartType]="pieChartType"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6">
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-6"></div>
+  </div>
+
+</section>

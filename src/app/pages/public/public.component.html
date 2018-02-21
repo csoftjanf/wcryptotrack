@@ -1,0 +1,81 @@
+<section class="content--full">
+  <header class="content__title">
+    <h2 *ngIf="coinlist">CryptoTrack Data as at: {{UpdateDate | date:'fullDate'}}  {{UpdateDate | date:'shortTime'}}</h2>
+  </header>
+
+  <!--<div class="row" >
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">As at <b>{{UpdateDate | date:'fullDate'}}  {{UpdateDate | date:'shortTime'}}</b></h2>
+        </div>
+      </div>
+    </div>
+  </div>-->
+
+  <div class="row" *ngIf="coinlist">
+
+    <div class="col-md-4" *ngFor="let genlist of coinlist">
+      <div class="card" (click)="GotToCoinView(genlist.mcap.id)">
+        <div class="card-body">
+          <div><h6 class="card-title"><b>{{ genlist.mcap.name }}</b></h6></div>
+          <div class="row"><div class="col-md-4 col-sm-4">Rank</div><div class="col-md-8 col-sm-8">{{ genlist.mcap.rank | number }}</div></div>
+          <div class="row"><div class="col-md-4 col-sm-4">Price :</div><div class="col-md-8 col-sm-8">${{genlist.mcap.price_aud | number:'1.2-4' }}</div></div>
+          <div class="row"><div class="col-md-4 col-sm-4">Change 7D :</div><div class="col-md-8 col-sm-8">{{genlist.mcap.percent_change_7d/100  | percent:'1.2-4' }}</div></div>
+          <div class="row"><div class="col-md-4 col-sm-4">Change 24H :</div><div class="col-md-8 col-sm-8">{{genlist.mcap.percent_change_24h/100 | percent:'1.2-4' }}</div></div>
+          <div class="row"><div class="col-md-4 col-sm-4">Change 1H :</div><div class="col-md-8 col-sm-8">{{genlist.mcap.percent_change_1h/100 | percent:'1.2-4' }}</div></div>
+          <div class="row" *ngIf="genlist.mcap.rank == '1'">
+            <div class="col-md-12">
+              <sparkline [dataset]="sparklineLineData" [options]="sparklineLineOptions"></sparkline>
+            </div>
+          </div>
+          <div class="row" *ngIf="genlist.mcap.rank == '2'">
+            <div class="col-md-12">
+              <sparkline [dataset]="sparklineLineData2" [options]="sparklineLineOptions"></sparkline>
+            </div>
+          </div>
+          <div class="row" *ngIf="genlist.mcap.rank == '3'">
+            <div class="col-md-12">
+              <sparkline [dataset]="sparklineLineData3" [options]="sparklineLineOptions"></sparkline>
+            </div>
+          </div>
+          <div class="row" *ngIf="genlist.mcap.rank == '4'">
+            <div class="col-md-12">
+              <sparkline [dataset]="sparklineLineData4" [options]="sparklineLineOptions"></sparkline>
+            </div>
+          </div>
+          <div class="row" *ngIf="genlist.mcap.rank == '5'">
+            <div class="col-md-12">
+              <sparkline [dataset]="sparklineLineData5" [options]="sparklineLineOptions"></sparkline>
+            </div>
+          </div>
+          <div class="row" *ngIf="genlist.mcap.rank == '6'">
+            <div class="col-md-12">
+              <sparkline [dataset]="sparklineLineData6" [options]="sparklineLineOptions"></sparkline>
+            </div>
+          </div>
+          <div class="row" *ngIf="genlist.mcap.rank == '7'">
+            <div class="col-md-12">
+              <sparkline [dataset]="sparklineLineData7" [options]="sparklineLineOptions"></sparkline>
+            </div>
+          </div>
+          <div class="row" *ngIf="genlist.mcap.rank == '8'">
+            <div class="col-md-12">
+              <sparkline [dataset]="sparklineLineData8" [options]="sparklineLineOptions"></sparkline>
+            </div>
+          </div>
+          <div class="row" *ngIf="genlist.mcap.rank == '9'">
+            <div class="col-md-12">
+              <sparkline [dataset]="sparklineLineData9" [options]="sparklineLineOptions"></sparkline>
+            </div>
+          </div>
+          <div class="row" *ngIf="genlist.mcap.rank == '10'">
+            <div class="col-md-12">
+              <sparkline [dataset]="sparklineLineData10" [options]="sparklineLineOptions"></sparkline>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

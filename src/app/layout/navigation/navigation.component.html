@@ -1,0 +1,23 @@
+<aside class="sidebar" *ngIf="sidebarVisible" [class.toggled]="sidebarVisible">
+
+  <div class="user" dropdown>
+    <div class="user__info" dropdownToggle>
+      <img class="user__img" src="./assets/demo/img/profile-pics/8.jpg" alt="">
+      <div>
+        <div class="user__name">Jan Fisher</div>
+        <div class="user__email">jan@csoft.com.au</div>
+      </div>
+    </div>
+    <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
+      <a class="dropdown-item" [routerLink]="['/profile']">View Profile</a>
+      <!--<a class="dropdown-item" href="">Settings</a>-->
+      <a class="dropdown-item" [routerLink]="['/logout']">Logout</a>
+    </div>
+  </div>
+  <ul class="navigation">
+    <li routerLinkActive="navigation__active"><a [routerLink]="['/crypto']"><i class="zmdi zmdi-home"></i> Home</a></li>
+    <li routerLinkActive="navigation__active"><a [routerLink]="['/profile']"><i class="zmdi zmdi-home"></i> profile</a></li>
+    <li routerLinkActive="navigation__active"><a [routerLink]="['/logout']"><i class="zmdi zmdi-home"></i> Logout</a></li>
+  </ul>
+
+</aside>
