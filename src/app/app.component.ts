@@ -20,8 +20,8 @@ export class AppComponent {
 
   ngOnInit() {
 
-    this.router.navigate(['./login']);
-    //this.router.navigate(['./public']);
+    //this.router.navigate(['./login']);
+    this.router.navigate(['./public']);
 
     //this.router.navigate(['./crypto'])
     //this.router.navigate(['./profile'])

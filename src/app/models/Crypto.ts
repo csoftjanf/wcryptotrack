@@ -36,6 +36,7 @@ export class CryptoStats {
 
 export class StatsByCoin {
   code: string;
+  qnty: number;
   purchaseValue: number;
   currentValue: number;
   profit: number;

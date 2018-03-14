@@ -1,0 +1,47 @@
+<section class="content">
+  <header class="content__title">
+    <div class="pagetitle">Update your user profile</div>
+  </header>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-2 prompt">First Name</div>
+            <div class="col-md-4 prompt"><input class="form-control form-control-lg" type="text" placeholder="First name" [(ngModel)]="profile.firstname"><i class="form-group__bar"></i></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-4"></div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-md-2 prompt">Last Name</div>
+            <div class="col-md-4 prompt"><input class="form-control form-control-lg" type="text" placeholder="Last name" [(ngModel)]="profile.lastname"><i class="form-group__bar"></i></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-4"></div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-md-2 prompt">User Name</div>
+            <div class="col-md-4 prompt"><input class="form-control form-control-lg" type="text" placeholder="User Name" [(ngModel)]="profile.username"><i class="form-group__bar"></i></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-4"></div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-md-2 prompt">Email</div>
+            <div class="col-md-4 prompt"><input class="form-control form-control-lg" type="text" placeholder="Email" [(ngModel)]="profile.email"><i class="form-group__bar"></i></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-4"></div>
+          </div>
+          <div class="form-group">
+            <button [disabled]="loading" class="btn btn-primary" (click)="updateItem()">Update</button>
+            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <a [routerLink]="['/crypto']" class="btn btn-link">Cancel</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

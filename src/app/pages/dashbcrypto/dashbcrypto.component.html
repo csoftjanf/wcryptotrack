@@ -206,7 +206,7 @@
     <div class="col-md-6 col-sm-6">
       <div class="card">
         <div class="card-body">
-          <h2>Coin holding</h2>
+          <h2>Coin holding value</h2>
           <div style="display: block">
             <canvas baseChart
                     [data]="pieChartData"
@@ -218,7 +218,21 @@
       <div class="col-md-6 col-sm-6">
       </div>
     </div>
-    <div class="col-md-6 col-sm-6"></div>
+
+    <div class="col-md-6 col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h2>Coin holding Quantity</h2>
+          <div style="display: block">
+            <canvas baseChart
+                    [data]="pieChartData2"
+                    [labels]="pieChartLabels2"
+                    [chartType]="pieChartType2"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 </section>

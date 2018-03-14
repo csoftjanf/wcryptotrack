@@ -5,7 +5,7 @@
     </div>
   </div>
   <header class="content__title">
-    <div class="pagetitle" *ngIf="_coinview">Coin View for {{_coinview.mcap.name}} </div>
+    <div class="pagetitle" *ngIf="_coinview">Coin View for {{_coinview.mcap.name}} as at  {{_coinview.mcap.valueDate | date:'fullDate'}}  {{_coinview.mcap.valueDate | date:'shortTime'}}</div>
   </header>
 
 
@@ -16,10 +16,10 @@
         <div class="card-body">
 
           <div class="row">
-            <div class="col-md-2 prompt">Date Updated :</div>
-            <div class="col-md-3 prompt">{{_coinview.mcap.valueDate  | date:'fullDate'}}</div>
             <div class="col-md-2 prompt">Rank :</div>
             <div class="col-md-3 prompt">{{_coinview.mcap.rank}}</div>
+            <div class="col-md-2 prompt"></div>
+            <div class="col-md-3 prompt"></div>
           </div>
 
           <div class="row">

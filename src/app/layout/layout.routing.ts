@@ -12,7 +12,9 @@ const LAYOUT_ROUTES: Routes = [
 
 
       { path: 'login', loadChildren: '../pages/login/login.module#LoginModule' },
-      { path: 'register', loadChildren: '../pages/register/register.module#RegisterModule'},
+      { path: 'register', loadChildren: '../pages/register/register.module#RegisterModule' },
+
+      { path: 'profile', loadChildren: '../pages/profile/profile.module#ProfileModule'},
 
       //Home
       { path: '', redirectTo: './crypto', pathMatch: 'full' },

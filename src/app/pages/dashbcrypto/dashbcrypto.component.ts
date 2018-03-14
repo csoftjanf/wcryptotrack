@@ -42,6 +42,10 @@ export class DashbCryptoComponent implements OnInit {
   public pieChartData: number[] = [];
   public pieChartType: string = 'pie';
 
+  public pieChartLabels2: string[] = [];
+  public pieChartData2: number[] = [];
+  public pieChartType2: string = 'pie';
+
   public currentUser: User;
 
   // for Add Coin
@@ -88,8 +92,6 @@ export class DashbCryptoComponent implements OnInit {
     this.GetPricesList(this.currentUser.tokenString);
     this.GetStats(this.currentUser.tokenString);
     this.GetCoinList();
-
-
 
     this.coinPurchase = new CoinPurchase();
     this.coinPurchase.coin = "";
@@ -163,13 +165,23 @@ export class DashbCryptoComponent implements OnInit {
       clone[0].data = ActualBalance;
       this.barChartData = clone;
 
-      // pie
+      // pie value
       this.pieChartLabels = [];
       this.pieChartData = [];
       this.stats.coinStats.forEach((element) => {
         this.pieChartLabels.push(element.code)
         this.pieChartData.push(element.currentValue);
       });
+
+
+      // pie qnty
+      this.pieChartLabels2 = [];
+      this.pieChartData2 = [];
+      this.stats.coinStats.forEach((element) => {
+        this.pieChartLabels2.push(element.code)
+        this.pieChartData2.push(element.qnty);
+      });
+
 
     },
       (err: HttpErrorResponse) => {
